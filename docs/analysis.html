@@ -2,16 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.30">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Analiz ve Bulgular – xxx’ Project Lab</title>
+<title>Analysis and Findings – FlyNomics</title>
 <style>
-/* Default styles provided by pandoc.
-** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
-*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -70,18 +67,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="./">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-b6a8276bf55561bdbc268162d41bd1f7.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-a8da12e74b29c2e7b17644f84b91567b.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-b6a8276bf55561bdbc268162d41bd1f7.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-8a7bb8a3e06cc5e54db5d15903f32f38.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-c748b559b5f85ef4b0a589108ee5e837.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-8a7bb8a3e06cc5e54db5d15903f32f38.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-0e5074b58188f8d01d6da366fae00f66.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-cd93109820dc32abe2ab9168c608f182.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-0e5074b58188f8d01d6da366fae00f66.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -283,8 +281,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    </a>
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">xxx’ Project Lab</span>
+    <span class="navbar-title">FlyNomics</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -333,6 +333,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#iç-hatlarda-çifte-şok-baskısı-crowding-out-effect" id="toc-iç-hatlarda-çifte-şok-baskısı-crowding-out-effect" class="nav-link" data-scroll-target="#iç-hatlarda-çifte-şok-baskısı-crowding-out-effect">7. İç Hatlarda “Çifte Şok” Baskısı (Crowding Out Effect)</a></li>
   <li><a href="#pandemi-etkisi-krizden-çıkış-stratejileri" id="toc-pandemi-etkisi-krizden-çıkış-stratejileri" class="nav-link" data-scroll-target="#pandemi-etkisi-krizden-çıkış-stratejileri">8. Pandemi Etkisi: Krizden Çıkış Stratejileri</a></li>
   <li><a href="#korelasyon-analizi-sayısal-kanıt-ve-kırılma-noktaları" id="toc-korelasyon-analizi-sayısal-kanıt-ve-kırılma-noktaları" class="nav-link" data-scroll-target="#korelasyon-analizi-sayısal-kanıt-ve-kırılma-noktaları">9. Korelasyon Analizi: Sayısal Kanıt ve Kırılma Noktaları</a></li>
+  <li><a href="#key-takeaways-1" id="toc-key-takeaways-1" class="nav-link" data-scroll-target="#key-takeaways-1">Key Takeaways</a></li>
+  <li><a href="#tourism-scissors-matrix" id="toc-tourism-scissors-matrix" class="nav-link" data-scroll-target="#tourism-scissors-matrix">“Tourism Scissors” Matrix</a></li>
+  <li><a href="#main-trend-and-the-scissors-effect" id="toc-main-trend-and-the-scissors-effect" class="nav-link" data-scroll-target="#main-trend-and-the-scissors-effect">1. Main Trend and the “Scissors Effect”</a></li>
+  <li><a href="#airport-and-season-based-deep-analysis-matrix" id="toc-airport-and-season-based-deep-analysis-matrix" class="nav-link" data-scroll-target="#airport-and-season-based-deep-analysis-matrix">2. Airport and Season-Based Deep Analysis Matrix</a></li>
+  <li><a href="#macroeconomic-sensitivity-response-to-usdtry-exchange-rate" id="toc-macroeconomic-sensitivity-response-to-usdtry-exchange-rate" class="nav-link" data-scroll-target="#macroeconomic-sensitivity-response-to-usdtry-exchange-rate">3. Macroeconomic Sensitivity: Response to USD/TRY Exchange Rate</a></li>
+  <li><a href="#causality-why-did-the-scissors-open" id="toc-causality-why-did-the-scissors-open" class="nav-link" data-scroll-target="#causality-why-did-the-scissors-open">4. Causality: Why Did the Scissors Open?</a></li>
+  <li><a href="#currency-advantage-and-the-foreign-tourist-surge-synergy-analysis" id="toc-currency-advantage-and-the-foreign-tourist-surge-synergy-analysis" class="nav-link" data-scroll-target="#currency-advantage-and-the-foreign-tourist-surge-synergy-analysis">5. Currency Advantage and the Foreign Tourist Surge (Synergy Analysis)</a></li>
+  <li><a href="#the-double-shock-effect-inflation-cpi-dynamics" id="toc-the-double-shock-effect-inflation-cpi-dynamics" class="nav-link" data-scroll-target="#the-double-shock-effect-inflation-cpi-dynamics">6. The Double Shock Effect: Inflation (CPI) Dynamics</a></li>
+  <li><a href="#the-double-shock-pressure-on-domestic-routes-crowding-out-effect" id="toc-the-double-shock-pressure-on-domestic-routes-crowding-out-effect" class="nav-link" data-scroll-target="#the-double-shock-pressure-on-domestic-routes-crowding-out-effect">7. The “Double Shock” Pressure on Domestic Routes (Crowding Out Effect)</a></li>
+  <li><a href="#pandemic-impact-recovery-strategies-from-the-crisis" id="toc-pandemic-impact-recovery-strategies-from-the-crisis" class="nav-link" data-scroll-target="#pandemic-impact-recovery-strategies-from-the-crisis">8. Pandemic Impact: Recovery Strategies from the Crisis</a></li>
+  <li><a href="#correlation-analysis-numerical-evidence-and-breakpoints" id="toc-correlation-analysis-numerical-evidence-and-breakpoints" class="nav-link" data-scroll-target="#correlation-analysis-numerical-evidence-and-breakpoints">9. Correlation Analysis: Numerical Evidence and Breakpoints</a></li>
   </ul>
 </nav>
 </nav>
@@ -346,7 +357,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Analiz ve Bulgular</h1>
+<h1 class="title">Analysis and Findings</h1>
 </div>
 
 
@@ -596,6 +607,279 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+<blockquote class="blockquote">
+<p><strong>The central question of this analysis:</strong> As Türkiye’s economy faced mounting pressure after 2021, why did international tourism surge while domestic travel collapsed? The answer lies in a phenomenon we call the <strong>“Tourism Scissors.”</strong></p>
+</blockquote>
+</section>
+<section id="key-takeaways-1" class="level3">
+<h3 class="anchored" data-anchor-id="key-takeaways-1">Key Takeaways</h3>
+<ul>
+<li>A clear divergence (X-crossing) between domestic and international route lines has been observed during summer months.</li>
+<li>Passenger trends in winter months follow a more parallel trajectory despite economic shocks.</li>
+<li>A direct relationship between the rise in the exchange rate and the decline in domestic tourist traffic has been identified.</li>
+</ul>
+<hr>
+</section>
+<section id="tourism-scissors-matrix" class="level3">
+<h3 class="anchored" data-anchor-id="tourism-scissors-matrix">“Tourism Scissors” Matrix</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"tourism_data.xlsx"</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>df_clean <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">Year                 =</span> Yıl,</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">Month                =</span> Ay,</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">Airport              =</span> Havalimanı,</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Flight Type</span><span class="st">`</span>        <span class="ot">=</span> <span class="st">`</span><span class="at">Hat Tipi</span><span class="st">`</span>,</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Monthly Passengers</span><span class="st">`</span> <span class="ot">=</span> <span class="st">`</span><span class="at">Aylık Yolcu</span><span class="st">`</span>,</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">Inflation            =</span> Enflasyon</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Year)) <span class="sc">%&gt;%</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Flight Type</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">case_when</span>(</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>      <span class="st">`</span><span class="at">Flight Type</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"İç Hat"</span>  <span class="sc">~</span> <span class="st">"Domestic"</span>,</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>      <span class="st">`</span><span class="at">Flight Type</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"Dış Hat"</span> <span class="sc">~</span> <span class="st">"International"</span>,</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">`</span><span class="at">Flight Type</span><span class="st">`</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">Season =</span> <span class="fu">case_when</span>(</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>      Month <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Aralık"</span>, <span class="st">"Ocak"</span>, <span class="st">"Şubat"</span>)     <span class="sc">~</span> <span class="st">"Winter"</span>,</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>      Month <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Mart"</span>, <span class="st">"Nisan"</span>, <span class="st">"Mayıs"</span>)       <span class="sc">~</span> <span class="st">"Spring"</span>,</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>      Month <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Haziran"</span>, <span class="st">"Temmuz"</span>, <span class="st">"Ağustos"</span>) <span class="sc">~</span> <span class="st">"Summer"</span>,</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>      Month <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Eylül"</span>, <span class="st">"Ekim"</span>, <span class="st">"Kasım"</span>)       <span class="sc">~</span> <span class="st">"Autumn"</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">Season =</span> <span class="fu">factor</span>(Season, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Spring"</span>, <span class="st">"Summer"</span>, <span class="st">"Autumn"</span>, <span class="st">"Winter"</span>))</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>df_seasonal <span class="ot">&lt;-</span> df_clean <span class="sc">%&gt;%</span></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Year, Season, Airport, <span class="st">`</span><span class="at">Flight Type</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">Total_Passengers =</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">Monthly Passengers</span><span class="st">`</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">Avg_USD          =</span> <span class="fu">mean</span>(<span class="st">`</span><span class="at">USD/TRY</span><span class="st">`</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<hr>
+</section>
+<section id="main-trend-and-the-scissors-effect" class="level3">
+<h3 class="anchored" data-anchor-id="main-trend-and-the-scissors-effect">1. Main Trend and the “Scissors Effect”</h3>
+<p>This graph illustrates the main divergence between domestic and international passenger traffic in Türkiye over the years.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analysis_files/figure-html/plot-main-scissors-en-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>🔍 <strong>Reading the Graph:</strong> Up until 2019, domestic and international lines moved in tandem — both growing steadily. The pandemic (2020) crushed both simultaneously. But the recovery told two completely different stories: <strong>international traffic rebounded aggressively</strong>, while <strong>domestic traffic plateaued well below its pre-pandemic peak</strong>. This is the scissors opening. The crossing point is not a coincidence — it marks the moment economic pressure became structural.</p>
+</blockquote>
+<hr>
+</section>
+<section id="airport-and-season-based-deep-analysis-matrix" class="level3">
+<h3 class="anchored" data-anchor-id="airport-and-season-based-deep-analysis-matrix">2. Airport and Season-Based Deep Analysis Matrix</h3>
+<p>When examining the regional and seasonal vulnerabilities of the scissors effect, the capacity divergence in tourism regions — especially during summer months — becomes clearly visible.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analysis_files/figure-html/plot-detailed-matrix-en-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>🔍 <strong>Reading the Graph:</strong> This matrix answers a critical follow-up question: <em>Is the scissors effect uniform across regions and seasons?</em> The answer is a clear <strong>no</strong>. Look at <strong>Antalya in Summer</strong> — international traffic towers over domestic, and the gap widens dramatically post-2021. In contrast, <strong>winter months across all airports</strong> show a much more compressed divergence. This tells us the scissors effect is not just national — it is <strong>concentrated in tourism hubs during peak season</strong>, making places like Antalya and Muğla especially exposed to macroeconomic volatility.</p>
+</blockquote>
+<hr>
+</section>
+<section id="macroeconomic-sensitivity-response-to-usdtry-exchange-rate" class="level3">
+<h3 class="anchored" data-anchor-id="macroeconomic-sensitivity-response-to-usdtry-exchange-rate">3. Macroeconomic Sensitivity: Response to USD/TRY Exchange Rate</h3>
+<p>Going beyond the time series and looking directly at the currency effect, the opposing momentum of the dollar on the two route types becomes apparent.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analysis_files/figure-html/plot-currency-impact-en-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>🔍 <strong>Reading the Graph:</strong> This is where correlation becomes causation. The two trend lines tell opposite stories from the <strong>same variable</strong> — the USD/TRY exchange rate. For <strong>international routes</strong>, a higher dollar means more foreign visitors flooding in, attracted by Türkiye’s relative affordability — the trend line slopes <strong>upward</strong>. For <strong>domestic routes</strong>, the same rising dollar eats into local purchasing power — the trend line slopes <strong>downward</strong>. One exchange rate, two completely opposite outcomes. This is the mechanical heart of the Tourism Scissors.</p>
+</blockquote>
+<hr>
+</section>
+<section id="causality-why-did-the-scissors-open" class="level3">
+<h3 class="anchored" data-anchor-id="causality-why-did-the-scissors-open">4. Causality: Why Did the Scissors Open?</h3>
+<p>To prove that this sharp divergence in the tourism scissors is not coincidental, we need to examine the macroeconomic shocks of the same period. The graph below shows the relentless rise of the dollar — the primary force reshaping Türkiye’s travel landscape.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df_econ <span class="ot">&lt;-</span> df_clean <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Year) <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Avg_USD       =</span> <span class="fu">mean</span>(<span class="st">`</span><span class="at">USD/TRY</span><span class="st">`</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Avg_Inflation =</span> <span class="fu">mean</span>(Inflation, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_econ, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Avg_USD)) <span class="sc">+</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"#E76F51"</span>, <span class="at">linewidth =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"#264653"</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">12</span>) <span class="sc">+</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Macroeconomic Shock: Average USD/TRY Exchange Rate by Year"</span>,</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"The primary factor eroding domestic tourists' purchasing power while making Türkiye attractive for foreign visitors"</span>,</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Year"</span>,</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Average Exchange Rate (₺)"</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="fu">min</span>(df_econ<span class="sc">$</span>Year, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="fu">max</span>(df_econ<span class="sc">$</span>Year, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">by =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">14</span>),</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analysis_files/figure-html/economy-plot-en-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>🔍 <strong>Reading the Graph:</strong> The USD/TRY curve is not gradual — it is <strong>parabolic</strong>. From a relatively stable ~3 TL in 2015–2017, the dollar exploded past 30 TL by 2023–2024. This is not a typical currency fluctuation; it represents a <strong>structural collapse in purchasing power</strong> for Turkish households. Every point on this curve represents a family that could no longer afford the same vacation they took the year before. At the same time, for every foreign visitor, Türkiye became progressively cheaper — a powerful magnet for international demand.</p>
+</blockquote>
+<hr>
+</section>
+<section id="currency-advantage-and-the-foreign-tourist-surge-synergy-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="currency-advantage-and-the-foreign-tourist-surge-synergy-analysis">5. Currency Advantage and the Foreign Tourist Surge (Synergy Analysis)</h3>
+<p>The main driving force behind the widening of the Tourism Scissors is the purchasing power advantage created by the depreciation of the Turkish Lira for foreign visitors. The graph below demonstrates the synchronized growth between the exchange rate and international passenger volume.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analysis_files/figure-html/plot-foreign-boom-en-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>🔍 <strong>Reading the Graph:</strong> Notice how the red line (dollar rate) and the navy bars (international passengers) rise <strong>in near-perfect harmony</strong> after 2021. This is not coincidence — it is a <strong>demand mechanism</strong>. As the lira weakened, Türkiye effectively went “on sale” for foreign visitors. Hotels, food, transport — all became significantly cheaper in dollar or euro terms. The result: a tourism boom driven entirely by currency dynamics. Importantly, this boom did <strong>not</strong> lift domestic travelers — it replaced them.</p>
+</blockquote>
+<hr>
+</section>
+<section id="the-double-shock-effect-inflation-cpi-dynamics" class="level3">
+<h3 class="anchored" data-anchor-id="the-double-shock-effect-inflation-cpi-dynamics">6. The Double Shock Effect: Inflation (CPI) Dynamics</h3>
+<p>The exchange rate alone does not tell the full story. Domestic tourists faced a second, compounding blow: <strong>inflation</strong>. Even if they wanted to travel, rising prices made it increasingly unaffordable.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_econ, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Avg_Inflation)) <span class="sc">+</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"#E63946"</span>, <span class="at">linewidth =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"#1D3557"</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">12</span>) <span class="sc">+</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Macroeconomic Shock: Average Inflation (CPI) by Year"</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"The rising cost of living that caused domestic tourists to cut non-essential (vacation) spending"</span>,</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Year"</span>,</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Average Inflation Index"</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="fu">min</span>(df_econ<span class="sc">$</span>Year, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="fu">max</span>(df_econ<span class="sc">$</span>Year, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">by =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">14</span>),</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analysis_files/figure-html/inflation-plot-en-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>🔍 <strong>Reading the Graph:</strong> If the exchange rate was the first blow, <strong>inflation was the second</strong>. The CPI curve shows that domestic prices surged dramatically — especially post-2021. For Turkish households, this created a brutal squeeze: their savings were worth less (currency depreciation), and everything cost more (inflation). Vacation spending — a discretionary expense — was the first item cut from household budgets. Together, these two forces form the <strong>“double shock”</strong> that pushed domestic travelers out of the market entirely.</p>
+</blockquote>
+<hr>
+</section>
+<section id="the-double-shock-pressure-on-domestic-routes-crowding-out-effect" class="level3">
+<h3 class="anchored" data-anchor-id="the-double-shock-pressure-on-domestic-routes-crowding-out-effect">7. The “Double Shock” Pressure on Domestic Routes (Crowding Out Effect)</h3>
+<p>In contrast to the international boom, the domestic side tells a story of suppression. The graph below shows how the rising dollar created an invisible ceiling on domestic capacity.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analysis_files/figure-html/plot-domestic-pressure-en-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>🔍 <strong>Reading the Graph:</strong> Compare this directly with Section 5. While the dollar and international passengers moved <strong>together and upward</strong>, here the rising navy line (dollar) coincides with <strong>stagnating red bars</strong> (domestic passengers). Despite a post-pandemic bounce in 2021–2022, domestic volumes never reclaimed their 2018 peak. The dollar did not just slow down domestic travel — it built a <strong>structural ceiling</strong> above it. This is the crowding-out effect in action: foreign demand, fueled by currency advantage, fills the capacity that domestic travelers can no longer afford.</p>
+</blockquote>
+<hr>
+</section>
+<section id="pandemic-impact-recovery-strategies-from-the-crisis" class="level3">
+<h3 class="anchored" data-anchor-id="pandemic-impact-recovery-strategies-from-the-crisis">8. Pandemic Impact: Recovery Strategies from the Crisis</h3>
+<p>The COVID-19 pandemic created the initial shock — but it also set the stage for a permanent structural shift. The question is not just who recovered, but <strong>how</strong> they recovered.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df_covid <span class="ot">&lt;-</span> df_seasonal <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Year <span class="sc">&gt;=</span> <span class="dv">2019</span> <span class="sc">&amp;</span> Year <span class="sc">&lt;=</span> <span class="dv">2022</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_covid, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Total_Passengers, <span class="at">fill =</span> <span class="st">`</span><span class="at">Flight Type</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Airport, <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> <span class="fu">label_number</span>(<span class="at">scale_cut =</span> <span class="fu">cut_short_scale</span>())) <span class="sc">+</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Domestic"</span> <span class="ot">=</span> <span class="st">"#E63946"</span>, <span class="st">"International"</span> <span class="ot">=</span> <span class="st">"#1D3557"</span>)) <span class="sc">+</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Pandemic and Recovery: 2019–2022 Trajectory"</span>,</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"While international routes quickly returned to pre-pandemic levels,</span><span class="sc">\n</span><span class="st">domestic recovery was stalled by economic barriers."</span>,</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Year"</span>, <span class="at">y =</span> <span class="st">"Total Passengers"</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analysis_files/figure-html/covid-impact-en-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>🔍 <strong>Reading the Graph:</strong> The 2020 collapse is visible across all airports and both route types — a complete standstill. But look at what happened in 2021 and 2022: <strong>international bars rebounded sharply</strong>, driven by foreign demand reactivating alongside the weakening lira. <strong>Domestic bars</strong>, however, recovered more slowly and unevenly. This airport-level view also reveals regional character: Antalya’s international recovery dwarfs its domestic one, while İzmir shows a more balanced bounce. The pandemic was the catalyst — but the economic environment determined who benefited from the recovery and who did not.</p>
+</blockquote>
+<hr>
+</section>
+<section id="correlation-analysis-numerical-evidence-and-breakpoints" class="level3">
+<h3 class="anchored" data-anchor-id="correlation-analysis-numerical-evidence-and-breakpoints">9. Correlation Analysis: Numerical Evidence and Breakpoints</h3>
+<p>Intuition and visuals tell a compelling story — but numbers seal the argument. Here we quantify exactly how strongly the exchange rate and domestic passenger traffic are linked, and why the time window you choose matters enormously.</p>
+<p><strong>Perspective A: All-Time (2015–2025)</strong> When examining the full dataset, the correlation coefficient is <strong>-0.15</strong>. This seemingly moderate figure is <strong>misleading</strong> — the 2020 pandemic year introduced extreme noise (near-zero passengers regardless of the exchange rate), which artificially weakens the correlation signal.</p>
+<p><strong>Perspective B: Economic Shock Period (2021–2025)</strong> When we isolate the post-pandemic recovery years, the correlation jumps to <strong>0.99</strong>. This is the clean signal: once the pandemic distortion is removed, the relationship between the dollar and domestic travel demand becomes unmistakably clear.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analysis_files/figure-html/economic-shock-plot-en-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>🔍 <strong>Reading the Graph:</strong> Each colored dot represents a month in the post-pandemic era. The trend line slopes <strong>upward</strong> — meaning as the dollar rose, domestic passengers did increase slightly due to the post-lockdown rebound. But here is the critical insight: <strong>the ceiling is visible</strong>. No matter how much time passed or how far the recovery went, monthly domestic passenger counts never broke through to 2018 levels. The glass ceiling is not metaphorical — it is embedded in the data. The dollar did not just slow recovery; it <strong>capped it permanently</strong>. This is where we leave our audience with a question worth asking: <em>If the exchange rate remains structurally high, will domestic tourism ever fully recover?</em></p>
+</blockquote>
 
 
 </section>

@@ -2,19 +2,21 @@
 title: "The Tourism Scissors"
 ---
 
-# FlyNomics Ekibi
+# Project Description
 
-Bu proje, Türkiye'deki havacılık hareketliliği ile makroekonomik göstergeler arasındaki ilişkiyi "Turizm Makası" metaforu üzerinden incelemektedir.
+This project explores the "Tourism Scissors" effect in Turkey (2015–2026)—a striking divergence where domestic travel declines as international tourism surges. By merging monthly aviation mobility data from DHMİ with key macroeconomic indicators (USD/TRY exchange rates and CPI) from the Central Bank of Turkey (TCMB), we aim to decode the intricate relationship between economic shifts and travel behavior. Our analysis pinpoints critical inflection points and tracks evolving passenger dynamics across major tourism hubs like Antalya, Muğla, and İzmir.
 
-### Takım Üyeleri
-* [Ayşenaz Özyer](https://github.com/aysenaz-ozyer-github-linkiniz)
-* [Başar Yılmaz](https://github.com/basar-yilmaz-github-linkiniz)
-* [Fatma Şeyma Toksöz](https://github.com/seyma-toksoz-github-linkiniz)
-* [Sude Nakişci](https://github.com/sude-nakisci-github-linkiniz)
+### Team Members
+
+-   [Ayşenaz Özyer](https://emu-hacettepe-analytics.github.io/emu430-spring2026-aysenazozyer/)
+-   [Başar Yılmaz](https://emu-hacettepe-analytics.github.io/emu430-spring2026-BasarYiilmaz/)
+-   [Fatma Şeyma Toksöz](https://emu-hacettepe-analytics.github.io/emu430-spring2026-b2220469019/)
+-   [Sude Nakişci](https://emu-hacettepe-analytics.github.io/emu430-spring2026-sudenakisci/)
 
 ### Key Takeaways
-* **Konu:** Havacılık verileri ve ekonomik göstergelerin turizm merkezleri özelinde entegrasyonu.
-* **Veri:** DHMİ yolcu istatistikleri ve TCMB EVDS (USD/TRY, TÜFE) verileri kullanılmıştır.
-* **Önemli Bulgular:** Ekonomik dalgalanmaların yüksek sezon (yaz) aylarında iç ve dış hat çizgilerini zıt yönlere iterek bir "makas" oluşturması.
-* **Sonuç:** Yerli turistin alım gücü kaybı ile yabancı turistin kur avantajı arasındaki korelasyonun görsel kanıtı.
 
+-   **Core Focus**: Examines the divergence between domestic and international flight demand in Turkey, termed the "Tourism Scissors" effect.
+
+-   **Data Integration**: Utilizes a dual-source dataset combining DHMİ passenger statistics with TCMB macroeconomic indicators (exchange rates and CPI) from 2015 to 2026.
+
+-   **Regional Analysis**: Specifically targets major tourism hubs (Antalya, Muğla, İzmir) to measure the localized impact of economic changes on travel behavior.
