@@ -46,22 +46,119 @@ df_seasonal <- df_clean %>%
   )
 
 # Görselleştirme
-ggplot(df_seasonal, aes(x = Yıl, y = Toplam_Yolcu, color = `Hat Tipi`, group = `Hat Tipi`)) +
-  geom_line(linewidth = 1.2) +
-  geom_point(size = 2) +
-  facet_grid(Havalimanı ~ Mevsim, scales = "free_y") +
-  scale_color_manual(values = c("İç Hat" = "#E63946", "Dış Hat" = "#1D3557")) +
-  scale_y_continuous(labels = label_number(scale_cut = cut_short_scale())) +
-  theme_minimal(base_size = 12) +
-  labs(
-    title = "Havalimanı ve Mevsim Bazlı Ayrışma Matrisi",
-    subtitle = "Yaz sezonunda İç ve Dış hatların zıt yönlü hareketi 'Makas' etkisini kanıtlamaktadır.",
-    x = "Yıl", y = "Toplam Yolcu", color = "Hat"
-  ) +
-  theme(legend.position = "bottom", axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
-### 2. Nedensellik: Makas Neden Açıldı?
+### 1. Ana Trend ve "Makas" Etkisi (The Scissors Effect)
+Bu grafik, Türkiye genelindeki dış hat ve iç hat yolcu sayılarının yıllara göre ana ayrışmasını göstermektedir.
+
+```{r}
+#| label: plot-main-scissors
+#| echo: false
+#| warning: false
+#| message: false
+
+# Yıllık toplam veriyi hazırlayalım
+df_yearly <- df_seasonal %>%
+  group_by(Yıl, `Hat Tipi`) %>%
+  summarise(
+    Toplam = sum(Toplam_Yolcu, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+# Ana Makas Grafiği
+ggplot(df_yearly, aes(x = Yıl, y = Toplam, color = `Hat Tipi`, group = `Hat Tipi`)) +
+  geom_line(linewidth = 1.5) +
+  geom_point(size = 3, shape = 21, fill = "white", stroke = 1.5) +
+  scale_color_manual(values = c("İç Hat" = "#E63946", "Dış Hat" = "#1D3557")) +
+  scale_y_continuous(labels = label_number(scale_cut = cut_short_scale())) +
+  scale_x_continuous(breaks = seq(min(df_yearly$Yıl), max(df_yearly$Yıl), by = 1)) +
+  theme_minimal(base_size = 14) +
+  labs(
+    title = "The Tourism Scissors: Türkiye Geneli Yolcu Ayrışması",
+    subtitle = "2021 sonrası ekonomik şok döneminde dış hatlar zirve yaparken,\niç hatlar toparlanamıyor.",
+    x = "Yıl",
+    y = "Toplam Yolcu",
+    color = "Hat Tipi"
+  ) +
+  theme(
+    legend.position = "bottom",
+    plot.title = element_text(face = "bold", size = 16),
+    panel.grid.minor = element_blank()
+  )
+```
+
+### 2. Havalimanı ve Mevsim Bazlı Derin Analiz Matrisi
+Makas etkisinin bölgesel ve mevsimsel kırılganlığını incelediğimizde, özellikle yaz aylarında turizm bölgelerindeki kapasite ayrışması net bir şekilde görülmektedir.
+
+```{r}
+#| label: plot-detailed-matrix
+#| echo: false
+#| warning: false
+#| fig-width: 10
+#| fig-height: 7
+
+# Grafiği çizerken anlık olarak " Havalimanı" kelimesini siliyoruz
+ggplot(df_seasonal %>% mutate(Havalimanı = str_replace(Havalimanı, " Havalimanı", "")), 
+       aes(x = Yıl, y = Toplam_Yolcu, color = `Hat Tipi`, group = `Hat Tipi`)) +
+  geom_line(linewidth = 1.2, alpha = 0.8) +
+  geom_point(size = 2) +
+  facet_grid(Havalimanı ~ Mevsim, scales = "free_y") + 
+  scale_color_manual(values = c("İç Hat" = "#E63946", "Dış Hat" = "#1D3557")) +
+  scale_y_continuous(labels = label_number(scale_cut = cut_short_scale())) +
+  scale_x_continuous(breaks = seq(2015, 2025, by = 2)) + 
+  theme_bw(base_size = 12) + 
+  labs(
+    title = "Mevsimsel Kırılganlık ve Bölgesel Dağılım Matrisi",
+    subtitle = "Özellikle 'Yaz' sezonunda turizm bölgelerindeki (örn: Antalya) dramatik kapasite değişimi.",
+    x = "Yıl", 
+    y = "Toplam Yolcu"
+  ) +
+  theme(
+    legend.position = "bottom",
+    legend.title = element_blank(),
+    strip.background = element_rect(fill = "#f0f0f0", color = "white"),
+    strip.text.x = element_text(face = "bold"),
+    # İŞTE SİHİRLİ DOKUNUŞ BURASI: Yazıyı yatay (angle = 0) yaptık
+    strip.text.y = element_text(face = "bold", angle = 0), 
+    axis.text.x = element_text(angle = 45, hjust = 1, size = 9)
+  )
+```
+
+### 3. Makroekonomik Duyarlılık: USD/TRY Kuruna Tepki
+Zaman serisinin ötesine geçerek doğrudan kur etkisine baktığımızda, doların iki hat üzerindeki zıt yönlü ivmesi ortaya çıkmaktadır.
+
+```{r}
+#| label: plot-currency-impact
+#| echo: false
+#| warning: false
+#| message: false
+
+ggplot(df_seasonal, aes(x = Ort_USD, y = Toplam_Yolcu, color = `Hat Tipi`)) +
+  # Noktaları biraz şeffaflaştırdık ki çizgi öne çıksın
+  geom_point(alpha = 0.4, size = 2.5) +
+  # Çizgiyi düz (solid) ve ekstra kalın (2.5) yaptık
+  geom_smooth(method = "lm", se = FALSE, linewidth = 1.5, linetype = "solid") +
+  facet_wrap(~ `Hat Tipi`, scales = "free_y") +
+  scale_color_manual(values = c("İç Hat" = "#E63946", "Dış Hat" = "#1D3557")) +
+  scale_y_continuous(labels = label_number(scale_cut = cut_short_scale())) +
+  theme_minimal(base_size = 14) +
+  labs(
+    title = "Makroekonomik Duyarlılık: USD/TRY Kuruna Tepki",
+    subtitle = "Dolar kuru arttıkça dış hatlarda gözlenen agresif büyüme ve iç hatlardaki negatif baskı.",
+    x = "Ortalama Dolar Kuru (USD/TRY)",
+    y = "Yolcu Hacmi",
+    # İŞTE BURASI: Çizginin ne olduğunu açıklayan alt not
+    caption = "Not: Grafikteki kalın düz çizgiler (Trend Line), kur ile yolcu hacmi arasındaki doğrusal eğilimi \ngöstermektedir."
+  ) +
+  theme(
+    legend.position = "none",
+    plot.title = element_text(face = "bold"),
+    strip.text = element_text(size = 14, face = "bold"),
+    plot.caption = element_text(face = "italic", color = "gray40", hjust = 0, size = 10)
+  )
+```
+
+### 4. Nedensellik: Makas Neden Açıldı?
 
 Turizm makasındaki bu sert açılımın tesadüf olmadığını kanıtlamak için, aynı dönemdeki makroekonomik şokları (USD/TRY kuru ve Enflasyon) incelememiz gerekmektedir. Aşağıdaki grafik, yerli turistin tatil yapma kapasitesini düşüren ana ekonomik faktörün trendini göstermektedir.
 
@@ -100,7 +197,53 @@ ggplot(df_econ, aes(x = Yıl, y = Ort_USD)) +
     panel.grid.minor = element_blank()
   )
 ```
-### 3. Çifte Şok Etkisi: Enflasyon (TÜFE) Dinamikleri
+### 5. Kur Avantajı ve Yabancı Turist Akını (Synergy Analysis)
+Turizm Makası'nın genişlemesindeki ana itici güç, Türk Lirası'ndaki değer kaybının yabancı ziyaretçiler için yarattığı "alım gücü avantajıdır". Aşağıdaki grafik, dolar kurundaki yükseliş ile dış hat yolcu hacmi arasındaki senkronize büyümeyi net bir şekilde sergilemektedir.
+
+```{r}
+#| label: plot-foreign-boom
+#| echo: false
+#| warning: false
+#| message: false
+
+# Sadece Dış Hatlar ve Yıllık bazda veri hazırlığı
+df_dis_hat <- df_seasonal %>%
+  filter(`Hat Tipi` == "Dış Hat") %>%
+  group_by(Yıl) %>%
+  summarise(
+    Yolcu = sum(Toplam_Yolcu, na.rm = TRUE),
+    Dolar = mean(Ort_USD, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+# Çift eksen katsayısı
+coeff <- max(df_dis_hat$Yolcu, na.rm = TRUE) / max(df_dis_hat$Dolar, na.rm = TRUE)
+
+ggplot(df_dis_hat, aes(x = Yıl)) +
+  geom_col(aes(y = Yolcu), fill = "#1D3557", alpha = 0.8) +
+  geom_line(aes(y = Dolar * coeff), color = "#E63946", linewidth = 2.5) +
+  geom_point(aes(y = Dolar * coeff), color = "#E63946", size = 4, shape = 21, fill = "white", stroke = 2) +
+  scale_y_continuous(
+    name = "Dış Hat Yolcu Hacmi (Sütunlar)",
+    labels = label_number(scale_cut = cut_short_scale()),
+    sec.axis = sec_axis(~ . / coeff, name = "Ortalama USD/TRY Kuru (Kırmızı Çizgi)")
+  ) +
+  scale_x_continuous(breaks = seq(min(df_dis_hat$Yıl), max(df_dis_hat$Yıl), by = 1)) +
+  theme_minimal(base_size = 14) +
+  labs(
+    title = "Kur Baskısı ve Dış Hat Sinerjisi",
+    subtitle = "USD/TRY artışıyla beraber dış hat kapasitesinin pandemi öncesi \nzirveleri zorlaması.",
+    x = "Yıl",
+    caption = "Not: Kırmızı çizgi dolar kurunu, lacivert sütunlar ise toplam dış hat yolcu sayısını temsil etmektedir."
+  ) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    axis.title.y.left = element_text(color = "#1D3557", face = "bold"),
+    axis.title.y.right = element_text(color = "#E63946", face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+```
+### 6. Çifte Şok Etkisi: Enflasyon (TÜFE) Dinamikleri
 
 Sadece döviz kurunun artması "Turizm Makası"nı tek başına açıklayamaz. Yerli turistin seyahat edebilme kabiliyetini tamamen ortadan kaldıran ikinci majör faktör, yurt içindeki enflasyonist ortamdır. Aşağıdaki grafik, yaşam maliyetlerindeki artışı gözler önüne sermektedir.
 
@@ -120,7 +263,7 @@ ggplot(df_econ, aes(x = Yıl, y = Ort_Enflasyon)) +
   theme_minimal(base_size = 12) +
   labs(
     title = "Makroekonomik Şok: Yıllara Göre Ortalama Enflasyon (TÜFE)",
-    subtitle = "Yerli turistin zorunlu olmayan (tatil) harcamalarını kesmesine neden olan hayat pahalılığı",
+    subtitle = "Yerli turistin zorunlu olmayan (tatil) harcamalarını kesmesine neden olan \nhayat pahalılığı",
     x = "Yıl",
     y = "Ortalama Enflasyon Endeksi"
   ) +
@@ -130,7 +273,55 @@ ggplot(df_econ, aes(x = Yıl, y = Ort_Enflasyon)) +
     panel.grid.minor = element_blank()
   )
 ```
-### 4. Pandemi Etkisi: Krizden Çıkış Stratejileri
+### 7. İç Hatlarda "Çifte Şok" Baskısı (Crowding Out Effect)
+Dış hatlardaki agresif büyümenin aksine, yerli turistin seyri makroekonomik baskıların ağırlığını hissetmektedir. Aşağıdaki grafik, dolar kurundaki aynı parabolik yükselişin iç hat kapasitesinde nasıl bir "baskılayıcı tavan" yarattığını ve pandemi öncesi seviyelere (2018) ulaşılmasını engellediğini kanıtlamaktadır.
+
+```{r}
+#| label: plot-domestic-pressure
+#| echo: false
+#| warning: false
+#| message: false
+
+# Sadece İç Hatlar ve Yıllık bazda veri hazırlığı
+df_ic_hat <- df_seasonal %>%
+  filter(`Hat Tipi` == "İç Hat") %>%
+  group_by(Yıl) %>%
+  summarise(
+    Yolcu = sum(Toplam_Yolcu, na.rm = TRUE),
+    Dolar = mean(Ort_USD, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+# Çift eksen katsayısı (İç hatların kendi kapasitesine göre yeniden hesaplanır)
+coeff_ic <- max(df_ic_hat$Yolcu, na.rm = TRUE) / max(df_ic_hat$Dolar, na.rm = TRUE)
+
+ggplot(df_ic_hat, aes(x = Yıl)) +
+  # Arkada yolcu hacmi (Sütunlar - İç hat rengi E63946)
+  geom_col(aes(y = Yolcu), fill = "#E63946", alpha = 0.7) +
+  # Önde Dolar Kuru (Çizgi - Siyah/Koyu Gri yaparak kontrast sağladık)
+  geom_line(aes(y = Dolar * coeff_ic), color = "#1D3557", linewidth = 2.5) +
+  geom_point(aes(y = Dolar * coeff_ic), color = "#1D3557", size = 4, shape = 21, fill = "white", stroke = 2) +
+  scale_y_continuous(
+    name = "İç Hat Yolcu Hacmi (Sütunlar)",
+    labels = label_number(scale_cut = cut_short_scale()),
+    sec.axis = sec_axis(~ . / coeff_ic, name = "Ortalama USD/TRY Kuru (Lacivert Çizgi)")
+  ) +
+  scale_x_continuous(breaks = seq(min(df_ic_hat$Yıl), max(df_ic_hat$Yıl), by = 1)) +
+  theme_minimal(base_size = 14) +
+  labs(
+    title = "Kur Baskısı ve İç Hatların Daralması",
+    subtitle = "Dolar kuru fırlarken, iç hat kapasitesinin 2018 zirvesinin altında ezilmesi.",
+    x = "Yıl",
+    caption = "Not: Lacivert çizgi dolar kurunu, kırmızı sütunlar ise toplam iç hat yolcu sayısını temsil etmektedir."
+  ) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    axis.title.y.left = element_text(color = "#E63946", face = "bold"),
+    axis.title.y.right = element_text(color = "#1D3557", face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+```
+### 8. Pandemi Etkisi: Krizden Çıkış Stratejileri
 
 2020 yılındaki COVID-19 pandemisi, havacılık sektörünü tamamen durma noktasına getirmiştir. Ancak pandemiden çıkış süreci, "Turizm Makası"nın kalıcı hale gelmesinde tetikleyici bir rol oynamıştır.
 
@@ -145,15 +336,16 @@ df_covid <- df_seasonal %>%
 ggplot(df_covid, aes(x = Yıl, y = Toplam_Yolcu, fill = `Hat Tipi`)) +
   geom_col(position = "dodge") +
   facet_wrap(~Havalimanı, scales = "free_y") +
+  scale_y_continuous(labels = label_number(scale_cut = cut_short_scale())) + 
   scale_fill_manual(values = c("İç Hat" = "#E63946", "Dış Hat" = "#1D3557")) +
   theme_minimal() +
   labs(
     title = "Pandemi ve Toparlanma: 2019-2022 Seyri",
-    subtitle = "Dış hatlar pandemi öncesi seviyelerine hızla dönerken, iç hatlardaki toparlanma ekonomik engellere takılmıştır.",
+    subtitle = "Dış hatlar pandemi öncesi seviyelerine hızla dönerken, \niç hatlardaki toparlanma ekonomik engellere takılmıştır.",
     x = "Yıl", y = "Toplam Yolcu"
   )
 ```
-### 5. Korelasyon Analizi: Sayısal Kanıt ve Kırılma Noktaları
+### 9. Korelasyon Analizi: Sayısal Kanıt ve Kırılma Noktaları
 
 Hipotezimizi doğrulamak adına, döviz kuru ile iç hat yolcu trafiği arasındaki ilişkiyi iki farklı perspektiften inceledik. Bu ayrım, makroekonomik şokların etkisini net bir şekilde ortaya koymaktadır.
 
@@ -180,12 +372,43 @@ cor_shock_data <- cor_all_data %>% filter(Yıl >= 2021)
 r_shock <- cor(cor_shock_data$Yolcu, cor_shock_data$Dolar, use = "complete.obs")
 ```
 
-**Perspektif A: Tüm Zamanlar (2015-2026)**
+**Perspektif A: Tüm Zamanlar (2015-2025)**
 Tüm veri seti incelendiğinde korelasyon katsayısı **`r round(r_all, 2)`** olarak hesaplanmıştır. 
-* **Yorum:** Bu rakamın -1'den uzak olması, Pandemi dönemindeki uçuş yasaklarının veriyi gürültülü hale getirmesinden kaynaklanmaktadır.
+Bu rakamın -1'den uzak olması, Pandemi dönemindeki uçuş yasaklarının veriyi gürültülü hale getirmesinden kaynaklanmaktadır.
 
-**Perspektif B: Ekonomik Kırılma Dönemi (2021-2026)**
-Ekonomik şokların yaşandığı son 5 yıl baz alındığında korelasyon katsayısı **`r round(r_shock, 2)`** seviyesine ulaşmaktadır.
-* **Yorum:** İşte projenin ispatı burada! Bu rakamın -1'e yaklaşması, dolar arttıkça yerli turistin uçuş trafiğinin matematiksel bir kesinlikle azaldığını kanıtlar.
+**Perspektif B: Ekonomik Kırılma Dönemi (2021-2025)**
+Ekonomik şokların yaşandığı son 5 yıl baz alındığında korelasyon katsayısı **`r round(r_shock, 2)`** seviyesine ulaşmaktadır. 
+Bu yüksek pozitif oran, pandemiden çıkışla birlikte gelen zorunlu toparlanmayı gösterse de; kapasitenin eski zirvelerine ulaşamaması, doların yerli turist üzerinde aşılmaz bir duvar ördüğünü kanıtlar.
+
+```{r}
+#| label: economic-shock-plot
+#| echo: false
+#| warning: false
+#| message: false
+
+library(tidyverse)
+library(scales)
+
+# 1. İŞTE R'IN BULAMADIĞI O SATIR: Veriyi filtrelenmiş halde hazırlıyoruz
+df_shock <- df_clean %>%
+  filter(`Hat Tipi` == "İç Hat", Yıl >= 2021)
+
+# 2. Şimdi Milyon (M) formatlı ve jilet gibi grafiğimizi çiziyoruz
+ggplot(df_shock, aes(x = `USD/TRY`, y = `Aylık Yolcu`)) + 
+  geom_point(aes(color = as.factor(Yıl)), size = 3, alpha = 0.8) +
+  geom_smooth(method = "lm", color = "darkred", linewidth = 1.5, se = FALSE) + 
+  scale_y_continuous(labels = label_number(scale_cut = cut_short_scale())) +
+  labs(
+    title = "Ekonomik Şok Dönemi: Kur Artışı \nve İç Hatlarda 'Cam Tavan'",
+    subtitle = "2021-2025 Arası Post-Pandemi Toparlanmasının Kur Altında Ezilmesi",
+    x = "Ortalama Dolar Kuru (USD/TRY)",
+    y = "Aylık Toplam İç Hat Yolcusu", 
+    color = "Yıl",
+    caption = "Not: Çizgi pozitif toparlanmayı gösterse de, \nhacimler 2018 zirvelerinin çok altındadır (Cam Tavan Etkisi)."
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold"),
+    legend.position = "right"
+  )
 ```
-
