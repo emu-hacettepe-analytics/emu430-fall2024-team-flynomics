@@ -1,24 +1,20 @@
 ---
-title: "Team XXX"
-sidebar: false 
+title: "The Tourism Scissors"
 ---
 
-This is our project webpage.
+# FlyNomics Ekibi
 
-Please stay tuned to follow our project activities.
+Bu proje, Türkiye'deki havacılık hareketliliği ile makroekonomik göstergeler arasındaki ilişkiyi "Turizm Makası" metaforu üzerinden incelemektedir.
 
-This is our template.
+### Takım Üyeleri
+* [Ayşenaz Özyer](https://github.com/aysenaz-ozyer-github-linkiniz)
+* [Başar Yılmaz](https://github.com/basar-yilmaz-github-linkiniz)
+* [Fatma Şeyma Toksöz](https://github.com/seyma-toksoz-github-linkiniz)
+* [Sude Nakişci](https://github.com/sude-nakisci-github-linkiniz)
 
-# Team Members
+### Key Takeaways
+* **Konu:** Havacılık verileri ve ekonomik göstergelerin turizm merkezleri özelinde entegrasyonu.
+* **Veri:** DHMİ yolcu istatistikleri ve TCMB EVDS (USD/TRY, TÜFE) verileri kullanılmıştır.
+* **Önemli Bulgular:** Ekonomik dalgalanmaların yüksek sezon (yaz) aylarında iç ve dış hat çizgilerini zıt yönlere iterek bir "makas" oluşturması.
+* **Sonuç:** Yerli turistin alım gücü kaybı ile yabancı turistin kur avantajı arasındaki korelasyonun görsel kanıtı.
 
-1.  [Edin_Džeko](https://tr.wikipedia.org/wiki/Edin_D%C5%BEeko)
-
-2.  [Dušan Tadić](https://tr.wikipedia.org/wiki/Du%C5%A1an_Tadi%C4%87)
-
-3.  [Frederico Rodrigues de Paula Santos](https://tr.wikipedia.org/wiki/Fred_(1993_do%C4%9Fumlu_futbolcu))
-
-4.  [Sebastian Szymański](https://tr.wikipedia.org/wiki/Sebastian_Szyma%C5%84ski)
-
-# Project Topic
-
-# Data Set

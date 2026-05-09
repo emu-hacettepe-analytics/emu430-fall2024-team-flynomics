@@ -1,5 +1,18 @@
 ---
-title: "Data"
+title: "Veri Seti ve Hazırlık"
 ---
 
-Data source: xxx
+### Veri Kaynakları
+Analizimizde iki ana kaynaktan gelen verileri birleştirdik:
+1. **DHMİ:** Antalya, Adnan Menderes, Dalaman ve Milas-Bodrum havalimanlarına ait aylık yolcu sayıları.
+2. **TCMB EVDS:** USD/TRY döviz kuru ve Enflasyon (TÜFE) oranları.
+
+### Veri Sözlüğü
+* **Yıl / Ay:** Gözlemin zaman dilimi.
+* **Havalimanı:** Verinin ait olduğu lokasyon.
+* **Hat Tipi:** İç Hat veya Dış Hat ayrımı.
+* **Aylık Yolcu:** İlgili aydaki toplam yolcu trafiği.
+* **USD/TRY:** O ayın ortalama dolar kuru.
+
+### Veri Ön İşleme
+Veri setimiz R ortamında `dplyr` kütüphanesi kullanılarak temizlenmiş, eksik değerler ayıklanmış ve mevsimsel analize uygun hale getirilmesi için aylar bazında mevsim kolonları (İlkbahar, Yaz, Sonbahar, Kış) oluşturulmuştur.
