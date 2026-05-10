@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Veri Seti ve Hazırlık – FlyNomics</title>
+<title>Dataset &amp; Preparation – FlyNomics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -287,9 +287,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#veri-kaynakları" id="toc-veri-kaynakları" class="nav-link active" data-scroll-target="#veri-kaynakları">Veri Kaynakları</a></li>
-  <li><a href="#veri-sözlüğü" id="toc-veri-sözlüğü" class="nav-link" data-scroll-target="#veri-sözlüğü">Veri Sözlüğü</a></li>
-  <li><a href="#veri-ön-işleme" id="toc-veri-ön-işleme" class="nav-link" data-scroll-target="#veri-ön-işleme">Veri Ön İşleme</a></li>
+  <li><a href="#data-sources" id="toc-data-sources" class="nav-link active" data-scroll-target="#data-sources">Data Sources</a></li>
+  <li><a href="#data-dictionary" id="toc-data-dictionary" class="nav-link" data-scroll-target="#data-dictionary">Data Dictionary</a></li>
+  <li><a href="#data-preprocessing" id="toc-data-preprocessing" class="nav-link" data-scroll-target="#data-preprocessing">Data Preprocessing</a></li>
   </ul>
 </nav>
 </nav>
@@ -303,7 +303,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Veri Seti ve Hazırlık</h1>
+<h1 class="title">Dataset &amp; Preparation</h1>
 </div>
 
 
@@ -320,23 +320,28 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="veri-kaynakları" class="level3">
-<h3 class="anchored" data-anchor-id="veri-kaynakları">Veri Kaynakları</h3>
-<p>Analizimizde iki ana kaynaktan gelen verileri birleştirdik: 1. <strong>DHMİ:</strong> Antalya, Adnan Menderes, Dalaman ve Milas-Bodrum havalimanlarına ait aylık yolcu sayıları. 2. <strong>TCMB EVDS:</strong> USD/TRY döviz kuru ve Enflasyon (TÜFE) oranları.</p>
+<section id="data-sources" class="level3">
+<h3 class="anchored" data-anchor-id="data-sources">Data Sources</h3>
+<p>In our analysis, we combined data from two primary sources:</p>
+<ol type="1">
+<li><strong>DHMI:</strong> Monthly passenger counts for Antalya, Adnan Menderes, Dalaman, and Milas-Bodrum airports.</li>
+<li><strong>CBRT EVDS:</strong> USD/TRY exchange rate and Inflation (CPI) figures.</li>
+</ol>
 </section>
-<section id="veri-sözlüğü" class="level3">
-<h3 class="anchored" data-anchor-id="veri-sözlüğü">Veri Sözlüğü</h3>
+<section id="data-dictionary" class="level3">
+<h3 class="anchored" data-anchor-id="data-dictionary">Data Dictionary</h3>
 <ul>
-<li><strong>Yıl / Ay:</strong> Gözlemin zaman dilimi.</li>
-<li><strong>Havalimanı:</strong> Verinin ait olduğu lokasyon.</li>
-<li><strong>Hat Tipi:</strong> İç Hat veya Dış Hat ayrımı.</li>
-<li><strong>Aylık Yolcu:</strong> İlgili aydaki toplam yolcu trafiği.</li>
-<li><strong>USD/TRY:</strong> O ayın ortalama dolar kuru.</li>
+<li><strong>Year / Month:</strong> The time period of the observation.</li>
+<li><strong>Airport:</strong> The location the data belongs to.</li>
+<li><strong>Flight Type:</strong> Domestic or International classification.</li>
+<li><strong>Monthly Passengers:</strong> Total passenger traffic for the given month.</li>
+<li><strong>USD/TRY:</strong> The average dollar exchange rate for that month.</li>
 </ul>
 </section>
-<section id="veri-ön-işleme" class="level3">
-<h3 class="anchored" data-anchor-id="veri-ön-işleme">Veri Ön İşleme</h3>
-<p>Veri setimiz R ortamında <code>dplyr</code> kütüphanesi kullanılarak temizlenmiş, eksik değerler ayıklanmış ve mevsimsel analize uygun hale getirilmesi için aylar bazında mevsim kolonları (İlkbahar, Yaz, Sonbahar, Kış) oluşturulmuştur.</p>
+<section id="data-preprocessing" class="level3">
+<h3 class="anchored" data-anchor-id="data-preprocessing">Data Preprocessing</h3>
+<p>The dataset was cleaned in the R environment using the <code>dplyr</code> library. Missing values were filtered out, and season columns (Spring, Summer, Autumn, Winter) were created at the monthly level to prepare the data for seasonal analysis.</p>
+<p><a href="tourism_data.RData">Download the processed file (.RData)</a></p>
 
 
 </section>

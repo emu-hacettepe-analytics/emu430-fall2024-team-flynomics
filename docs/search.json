@@ -23,9 +23,9 @@
   {
     "objectID": "data.html",
     "href": "data.html",
-    "title": "Veri Seti ve Hazırlık",
+    "title": "Dataset & Preparation",
     "section": "",
-    "text": "Veri Kaynakları\nAnalizimizde iki ana kaynaktan gelen verileri birleştirdik: 1. DHMİ: Antalya, Adnan Menderes, Dalaman ve Milas-Bodrum havalimanlarına ait aylık yolcu sayıları. 2. TCMB EVDS: USD/TRY döviz kuru ve Enflasyon (TÜFE) oranları.\n\n\nVeri Sözlüğü\n\nYıl / Ay: Gözlemin zaman dilimi.\nHavalimanı: Verinin ait olduğu lokasyon.\nHat Tipi: İç Hat veya Dış Hat ayrımı.\nAylık Yolcu: İlgili aydaki toplam yolcu trafiği.\nUSD/TRY: O ayın ortalama dolar kuru.\n\n\n\nVeri Ön İşleme\nVeri setimiz R ortamında dplyr kütüphanesi kullanılarak temizlenmiş, eksik değerler ayıklanmış ve mevsimsel analize uygun hale getirilmesi için aylar bazında mevsim kolonları (İlkbahar, Yaz, Sonbahar, Kış) oluşturulmuştur.\n\n\n\n\n Back to top"
+    "text": "Data Sources\nIn our analysis, we combined data from two primary sources:\n\nDHMI: Monthly passenger counts for Antalya, Adnan Menderes, Dalaman, and Milas-Bodrum airports.\nCBRT EVDS: USD/TRY exchange rate and Inflation (CPI) figures.\n\n\n\nData Dictionary\n\nYear / Month: The time period of the observation.\nAirport: The location the data belongs to.\nFlight Type: Domestic or International classification.\nMonthly Passengers: Total passenger traffic for the given month.\nUSD/TRY: The average dollar exchange rate for that month.\n\n\n\nData Preprocessing\nThe dataset was cleaned in the R environment using the dplyr library. Missing values were filtered out, and season columns (Spring, Summer, Autumn, Winter) were created at the monthly level to prepare the data for seasonal analysis.\nDownload the processed file (.RData)\n\n\n\n\n Back to top"
   },
   {
     "objectID": "index.html#please-navigate-to-our-data-page-for-detailed-information-on-data-preprocessing-cleaning-and-to-access-our-final-.rdata-file.",

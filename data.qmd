@@ -1,18 +1,33 @@
+
 ---
-title: "Veri Seti ve Hazırlık"
+title: "Dataset & Preparation"
 ---
 
-### Veri Kaynakları
-Analizimizde iki ana kaynaktan gelen verileri birleştirdik:
-1. **DHMİ:** Antalya, Adnan Menderes, Dalaman ve Milas-Bodrum havalimanlarına ait aylık yolcu sayıları.
-2. **TCMB EVDS:** USD/TRY döviz kuru ve Enflasyon (TÜFE) oranları.
+```{r}
+#| include: false
+library(readxl)
+dir.create("data", showWarnings = FALSE)
+tourism_data <- read_excel("tourism_data.xlsx")
+save(tourism_data, file = "data/tourism_data.RData")
+```
 
-### Veri Sözlüğü
-* **Yıl / Ay:** Gözlemin zaman dilimi.
-* **Havalimanı:** Verinin ait olduğu lokasyon.
-* **Hat Tipi:** İç Hat veya Dış Hat ayrımı.
-* **Aylık Yolcu:** İlgili aydaki toplam yolcu trafiği.
-* **USD/TRY:** O ayın ortalama dolar kuru.
+### Data Sources
 
-### Veri Ön İşleme
-Veri setimiz R ortamında `dplyr` kütüphanesi kullanılarak temizlenmiş, eksik değerler ayıklanmış ve mevsimsel analize uygun hale getirilmesi için aylar bazında mevsim kolonları (İlkbahar, Yaz, Sonbahar, Kış) oluşturulmuştur.
+In our analysis, we combined data from two primary sources:
+
+1. **DHMI:** Monthly passenger counts for Antalya, Adnan Menderes, Dalaman, and Milas-Bodrum airports.
+2. **CBRT EVDS:** USD/TRY exchange rate and Inflation (CPI) figures.
+
+### Data Dictionary
+
+* **Year / Month:** The time period of the observation.
+* **Airport:** The location the data belongs to.
+* **Flight Type:** Domestic or International classification.
+* **Monthly Passengers:** Total passenger traffic for the given month.
+* **USD/TRY:** The average dollar exchange rate for that month.
+
+### Data Preprocessing
+
+The dataset was cleaned in the R environment using the `dplyr` library. Missing values were filtered out, and season columns (Spring, Summer, Autumn, Winter) were created at the monthly level to prepare the data for seasonal analysis.
+
+[Download the processed file (.RData)](tourism_data.RData)
