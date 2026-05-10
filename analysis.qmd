@@ -18,12 +18,12 @@ execute:
 
 ---
 
-### "Tourism Scissors" Matrix
+### Data Preprocessing
 
 ```{r}
-#| label: full-analysis-en
-#| code-fold: true       
-#| message: false     
+#| label: preprocessing-v2
+#| code-fold: true
+#| message: false
 library(tidyverse)
 library(readxl)
 library(scales)
@@ -32,12 +32,13 @@ df <- read_excel("tourism_data.xlsx")
 
 df_clean <- df %>%
   rename(
-    Year                 = Yıl,
-    Month                = Ay,
-    Airport              = Havalimanı,
-    `Flight Type`        = `Hat Tipi`,
-    `Monthly Passengers` = `Aylık Yolcu`,
-    Inflation            = Enflasyon
+    Year                    = Yıl,
+    Month                   = Ay,
+    Airport                 = Havalimanı,
+    `Flight Type`           = `Hat Tipi`,
+    `Monthly Passengers`    = `Aylık Yolcu`,
+    `Cumulative Passengers` = `Kümülatif Yolcu`,
+    Inflation               = Enflasyon
   ) %>%
   filter(!is.na(Year)) %>%
   mutate(
@@ -71,8 +72,8 @@ df_seasonal <- df_clean %>%
 This graph illustrates the main divergence between domestic and international passenger traffic in Türkiye over the years.
 
 ```{r}
-#| label: plot-main-scissors-en
-#| echo: false
+#| label: plot-scissors-v2
+#| code-fold: true
 #| warning: false
 #| message: false
 
@@ -113,8 +114,8 @@ ggplot(df_yearly, aes(x = Year, y = Total, color = `Flight Type`, group = `Fligh
 When examining the regional and seasonal vulnerabilities of the scissors effect, the capacity divergence in tourism regions , especially during summer months , becomes clearly visible.
 
 ```{r}
-#| label: plot-detailed-matrix-en
-#| echo: false
+#| label: plot-matrix-v2
+#| code-fold: true
 #| warning: false
 #| fig-width: 10
 #| fig-height: 7
@@ -153,8 +154,8 @@ ggplot(df_seasonal %>% mutate(Airport = str_replace(Airport, " Havalimanı", "")
 Going beyond the time series and looking directly at the currency effect, the opposing momentum of the dollar on the two route types becomes apparent.
 
 ```{r}
-#| label: plot-currency-impact-en
-#| echo: false
+#| label: plot-currency-v2
+#| code-fold: true
 #| warning: false
 #| message: false
 
@@ -189,10 +190,10 @@ ggplot(df_seasonal, aes(x = Avg_USD, y = Total_Passengers, color = `Flight Type`
 To prove that this sharp divergence in the tourism scissors is not coincidental, we need to examine the macroeconomic shocks of the same period. The graph below shows the relentless rise of the dollar , the primary force reshaping Türkiye's travel landscape.
 
 ```{r}
-#| label: economy-plot-en
+#| label: plot-economy-v2
+#| code-fold: true
 #| message: false
 #| warning: false
-#| code-fold: true
 
 df_econ <- df_clean %>%
   group_by(Year) %>%
@@ -227,8 +228,8 @@ ggplot(df_econ, aes(x = Year, y = Avg_USD)) +
 The main driving force behind the widening of the Tourism Scissors is the purchasing power advantage created by the depreciation of the Turkish Lira for foreign visitors. The graph below demonstrates the synchronized growth between the exchange rate and international passenger volume.
 
 ```{r}
-#| label: plot-foreign-boom-en
-#| echo: false
+#| label: plot-foreign-boom-v2
+#| code-fold: true
 #| warning: false
 #| message: false
 
@@ -277,10 +278,10 @@ ggplot(df_intl, aes(x = Year)) +
 The exchange rate alone does not tell the full story. Domestic tourists faced a second, compounding blow: **inflation**. Even if they wanted to travel, rising prices made it increasingly unaffordable.
 
 ```{r}
-#| label: inflation-plot-en
+#| label: plot-inflation-v2
+#| code-fold: true
 #| message: false
 #| warning: false
-#| code-fold: true
 
 ggplot(df_econ, aes(x = Year, y = Avg_Inflation)) +
   geom_line(color = "#E63946", linewidth = 1.5) +
@@ -308,8 +309,8 @@ ggplot(df_econ, aes(x = Year, y = Avg_Inflation)) +
 In contrast to the international boom, the domestic side tells a story of suppression. The graph below shows how the rising dollar created an invisible ceiling on domestic capacity.
 
 ```{r}
-#| label: plot-domestic-pressure-en
-#| echo: false
+#| label: plot-domestic-v2
+#| code-fold: true
 #| warning: false
 #| message: false
 
@@ -358,22 +359,42 @@ ggplot(df_dom, aes(x = Year)) +
 The COVID-19 pandemic created the initial shock , but it also set the stage for a permanent structural shift. The question is not just who recovered, but **how** they recovered.
 
 ```{r}
-#| label: covid-impact-en
+#| label: plot-covid-v2
 #| code-fold: true
 
-df_covid <- df_seasonal %>%
-  filter(Year >= 2019 & Year <= 2022)
+df_covid <- df_clean %>%
+  filter(Year >= 2019 & Year <= 2022) %>%
+  filter(Month == "Aralık") %>%
+  select(
+    Year,
+    Airport,
+    `Flight Type`,
+    Total_Passengers = `Cumulative Passengers`
+  ) %>%
+  mutate(
+    Airport = str_replace(Airport, " Havalimanı", "")
+  )
 
-ggplot(df_covid, aes(x = Year, y = Total_Passengers, fill = `Flight Type`)) +
-  geom_col(position = "dodge") +
-  facet_wrap(~ Airport, scales = "free_y") +
-  scale_y_continuous(labels = label_number(scale_cut = cut_short_scale())) +
+ggplot(df_covid, aes(x = factor(Year), y = Total_Passengers, fill = `Flight Type`)) +
+  geom_col(position = position_dodge(width = 0.8), width = 0.7) +
+  facet_wrap(~ Airport, scales = "free_y", ncol = 2) +
+  scale_y_continuous(
+    labels = label_number(scale_cut = cut_short_scale()),
+    expand = expansion(mult = c(0, 0.08))
+  ) +
   scale_fill_manual(values = c("Domestic" = "#E63946", "International" = "#1D3557")) +
-  theme_minimal() +
+  theme_minimal(base_size = 12) +
+  theme(
+    legend.position = "bottom",
+    strip.text = element_text(face = "bold"),
+    panel.grid.major.x = element_blank()
+  ) +
   labs(
     title = "Pandemic and Recovery: 2019–2022 Trajectory",
     subtitle = "While international routes quickly returned to pre-pandemic levels,\ndomestic recovery was stalled by economic barriers.",
-    x = "Year", y = "Total Passengers"
+    x = "Year",
+    y = "Total Passengers",
+    fill = "Route Type"
   )
 ```
 
@@ -386,8 +407,8 @@ ggplot(df_covid, aes(x = Year, y = Total_Passengers, fill = `Flight Type`)) +
 Intuition and visuals tell a compelling story , but numbers seal the argument. Here we quantify exactly how strongly the exchange rate and domestic passenger traffic are linked, and why the time window you choose matters enormously.
 
 ```{r}
-#| label: correlation-deep-dive-en
-#| echo: false
+#| label: correlation-v2
+#| code-fold: true
 #| warning: false
 #| message: false
 
@@ -413,13 +434,10 @@ When examining the full dataset, the correlation coefficient is **`r round(r_all
 When we isolate the post-pandemic recovery years, the correlation jumps to **`r round(r_shock, 2)`**. This is the clean signal: once the pandemic distortion is removed, the relationship between the dollar and domestic travel demand becomes unmistakably clear.
 
 ```{r}
-#| label: economic-shock-plot-en
-#| echo: false
+#| label: plot-shock-v2
+#| code-fold: true
 #| warning: false
 #| message: false
-
-library(tidyverse)
-library(scales)
 
 df_shock <- df_clean %>%
   filter(`Flight Type` == "Domestic", Year >= 2021)
@@ -434,7 +452,7 @@ ggplot(df_shock, aes(x = `USD/TRY`, y = `Monthly Passengers`)) +
     x = "Average Exchange Rate (USD/TRY)",
     y = "Monthly Total Domestic Passengers",
     color = "Year",
-    caption = "Note: Although the line shows positive recovery,volumes remain well below the 2018 peaks \n(Glass Ceiling Effect)."
+    caption = "Note: Although the line shows positive recovery, volumes remain well below the 2018 peaks \n(Glass Ceiling Effect)."
   ) +
   theme_minimal(base_size = 14) +
   theme(

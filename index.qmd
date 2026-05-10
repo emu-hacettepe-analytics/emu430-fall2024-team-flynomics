@@ -4,7 +4,7 @@ title: "The Tourism Scissors"
 
 # Project Description
 
-This project explores the "Tourism Scissors" effect in Turkey (2015–2026)—a striking divergence where domestic travel declines as international tourism surges. By merging monthly aviation mobility data from DHMİ with key macroeconomic indicators (USD/TRY exchange rates and CPI) from the Central Bank of Turkey (TCMB), we aim to decode the intricate relationship between economic shifts and travel behavior. Our analysis pinpoints critical inflection points and tracks evolving passenger dynamics across major tourism hubs like Antalya, Muğla, and İzmir.
+This project explores the "Tourism Scissors" effect in Turkey (2015–2026), a striking divergence where domestic travel declines as international tourism surges. By merging monthly aviation mobility data from DHMİ with key macroeconomic indicators (USD/TRY exchange rates and CPI) from the Central Bank of Turkey (TCMB), we aim to decode the intricate relationship between economic shifts and travel behavior. Our analysis pinpoints critical inflection points and tracks evolving passenger dynamics across major tourism hubs like Antalya, Muğla, and İzmir.
 
 ### Team Members
 
