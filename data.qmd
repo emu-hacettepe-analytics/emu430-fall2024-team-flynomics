@@ -89,7 +89,7 @@ In our analysis, we combined data from two primary sources:
 ### Data Dictionary
 
 | Variable | Description |
-|------------------------------------|------------------------------------|
+|----|----|
 | **Year** | The year of the observation (2015–2025) |
 | **Month** | The month of the observation (Turkish month names) |
 | **Airport** | The airport name (Antalya, Adnan Menderes, Dalaman, Milas-Bodrum) |
