@@ -1,33 +1,205 @@
-
 ---
 title: "Dataset & Preparation"
+sidebar: false
+format:
+  html:
+    toc: true
+  pdf:
+    colorlinks: true
+    papersize: a4
+    fontsize: 11pt
+    margin-left: 2cm
+    margin-right: 2cm
+    margin-top: 2cm
+    margin-bottom: 2cm
+execute:
+  warning: false
+  message: false
+  code-fold: true
 ---
 
 ```{r}
 #| include: false
 library(readxl)
+library(tidyverse)
+library(scales)
+library(knitr)
+
 dir.create("data", showWarnings = FALSE)
 tourism_data <- read_excel("tourism_data.xlsx")
 save(tourism_data, file = "data/tourism_data.RData")
+
+df <- read_excel("tourism_data.xlsx")
+
+df_clean <- df %>%
+  rename(
+    Year                    = Yıl,
+    Month                   = Ay,
+    Airport                 = Havalimanı,
+    `Flight Type`           = `Hat Tipi`,
+    `Monthly Passengers`    = `Aylık Yolcu`,
+    `Cumulative Passengers` = `Kümülatif Yolcu`,
+    Inflation               = Enflasyon
+  ) %>%
+  filter(!is.na(Year)) %>%
+  mutate(
+    `Flight Type` = case_when(
+      `Flight Type` == "İç Hat"  ~ "Domestic",
+      `Flight Type` == "Dış Hat" ~ "International",
+      TRUE ~ `Flight Type`
+    ),
+    Season = case_when(
+      Month %in% c("Aralık", "Ocak", "Şubat")     ~ "Winter",
+      Month %in% c("Mart", "Nisan", "Mayıs")       ~ "Spring",
+      Month %in% c("Haziran", "Temmuz", "Ağustos") ~ "Summer",
+      Month %in% c("Eylül", "Ekim", "Kasım")       ~ "Autumn"
+    ),
+    Season = factor(Season, levels = c("Spring", "Summer", "Autumn", "Winter"))
+  )
 ```
 
 ### Data Sources
 
 In our analysis, we combined data from two primary sources:
 
-1. **DHMI:** Monthly passenger counts for Antalya, Adnan Menderes, Dalaman, and Milas-Bodrum airports.
-2. **CBRT EVDS:** USD/TRY exchange rate and Inflation (CPI) figures.
+1.  **DHMI (State Airports Authority):** Monthly passenger counts for Antalya, Adnan Menderes (İzmir), Dalaman, and Milas-Bodrum airports. Data was obtained from official DHMI annual statistical reports covering the period 2015–2025.
+
+2.  **CBRT EVDS (Central Bank of the Republic of Turkey):** USD/TRY exchange rate (monthly average) and Inflation (CPI) figures, accessed via the CBRT Electronic Data Delivery System.
+
+**Why these sources?** The combination of airport-level mobility data with macroeconomic indicators allows us to directly test whether currency depreciation and inflation structurally affect domestic versus international travel demand, the core hypothesis of the Tourism Scissors framework.
+
+------------------------------------------------------------------------
+
+### Objectives & Accomplishments
+
+**Objectives:**
+
+-   Quantify the divergence between domestic and international passenger traffic in Turkish airports from 2015 to 2025.
+-   Identify whether macroeconomic shocks (USD/TRY, CPI) are statistically associated with the observed divergence.
+-   Determine whether the scissors effect is uniform across regions and seasons, or concentrated in specific tourism hubs.
+
+**Accomplishments:**
+
+-   Successfully merged two heterogeneous data sources (DHMI + TCMB) into a single clean, analysis-ready panel dataset.
+-   Identified a strong negative correlation (r = −0.89) between the USD/TRY rate and domestic passenger volumes in the post-pandemic period (2021–2025).
+-   Demonstrated that the scissors effect is most pronounced in coastal tourism airports (Antalya, Muğla) during summer months.
+
+------------------------------------------------------------------------
 
 ### Data Dictionary
 
-* **Year / Month:** The time period of the observation.
-* **Airport:** The location the data belongs to.
-* **Flight Type:** Domestic or International classification.
-* **Monthly Passengers:** Total passenger traffic for the given month.
-* **USD/TRY:** The average dollar exchange rate for that month.
+| Variable | Description |
+|------------------------------------|------------------------------------|
+| **Year** | The year of the observation (2015–2025) |
+| **Month** | The month of the observation (Turkish month names) |
+| **Airport** | The airport name (Antalya, Adnan Menderes, Dalaman, Milas-Bodrum) |
+| **Flight Type** | Route classification: Domestic (İç Hat) or International (Dış Hat) |
+| **Monthly Passengers** | Total passenger count for that airport, flight type, and month |
+| **Cumulative Passengers** | Running yearly total of passengers up to that month |
+| **USD/TRY** | Average USD/TRY exchange rate for that month |
+| **Inflation** | Monthly average CPI (Consumer Price Index) value |
+| **Season** | Derived variable: Spring / Summer / Autumn / Winter |
+
+------------------------------------------------------------------------
 
 ### Data Preprocessing
 
-The dataset was cleaned in the R environment using the `dplyr` library. Missing values were filtered out, and season columns (Spring, Summer, Autumn, Winter) were created at the monthly level to prepare the data for seasonal analysis.
+The dataset was cleaned and transformed in R using the `tidyverse` package. Key steps:
 
-[Download the processed file (.RData)](tourism_data.RData)
+-   **Renaming:** Turkish column names were translated to English for reproducibility.
+-   **Filtering:** Rows with missing `Year` values were removed.
+-   **Recoding:** Flight type labels translated from Turkish (İç Hat → Domestic, Dış Hat → International).
+-   **Season derivation:** A `Season` variable was constructed from month names, factored in meteorological order.
+-   **Aggregation:** A seasonal summary table was computed, grouping by Year, Season, Airport and Flight Type.
+
+```{r}
+#| label: preprocessing-data-page
+#| code-fold: true
+#| message: false
+
+# df_clean already prepared in the setup chunk above.
+# Displaying a preview of the cleaned dataset:
+head(df_clean, 10) |> kable(caption = "First 10 rows of the cleaned dataset")
+```
+
+------------------------------------------------------------------------
+
+### Exploratory Data Overview
+
+A first look at the dataset structure and key distributions before the full analysis.
+
+```{r}
+#| label: eda-dimensions
+#| code-fold: true
+
+cat("Dataset dimensions:", nrow(df_clean), "rows ×", ncol(df_clean), "columns\n")
+cat("Years covered:", min(df_clean$Year), "–", max(df_clean$Year), "\n")
+cat("Airports:", paste(unique(df_clean$Airport), collapse = ", "), "\n")
+cat("Flight types:", paste(unique(df_clean$`Flight Type`), collapse = ", "), "\n")
+```
+
+```{r}
+#| label: eda-summary-table
+#| code-fold: true
+
+df_clean %>%
+  group_by(Year, `Flight Type`) %>%
+  summarise(
+    Total_Passengers = sum(`Monthly Passengers`, na.rm = TRUE),
+    Avg_USD = round(mean(`USD/TRY`, na.rm = TRUE), 2),
+    .groups = "drop"
+  ) %>%
+  pivot_wider(
+    names_from  = `Flight Type`,
+    values_from = Total_Passengers,
+    names_prefix = "Passengers_"
+  ) %>%
+  rename(`USD/TRY (avg)` = Avg_USD) %>%
+  kable(
+    caption     = "Annual Passenger Totals and Average Exchange Rate",
+    format.args = list(big.mark = ",")
+  )
+```
+
+```{r}
+#| label: eda-distribution
+#| code-fold: true
+#| fig-width: 9
+#| fig-height: 4
+
+ggplot(df_clean, aes(x = `Monthly Passengers`, fill = `Flight Type`)) +
+  geom_histogram(bins = 40, alpha = 0.7, position = "identity") +
+  scale_x_continuous(labels = label_number(scale_cut = cut_short_scale())) +
+  scale_fill_manual(values = c("Domestic" = "#E63946", "International" = "#1D3557")) +
+  facet_wrap(~ `Flight Type`, scales = "free_x") +
+  theme_minimal(base_size = 12) +
+  labs(
+    title    = "Distribution of Monthly Passenger Counts by Flight Type",
+    subtitle = "International traffic shows a wider, right-skewed distribution reflecting strong seasonal peaks",
+    x = "Monthly Passengers",
+    y = "Count"
+  ) +
+  theme(legend.position = "none")
+```
+
+```{r}
+#| label: eda-missing
+#| code-fold: true
+
+df_clean %>%
+  summarise(across(everything(), ~ sum(is.na(.)))) %>%
+  pivot_longer(everything(),
+               names_to  = "Variable",
+               values_to = "Missing Values") %>%
+  kable(caption = "Missing Value Check per Variable")
+```
+
+------------------------------------------------------------------------
+
+[Download the processed dataset (.RData)](data/tourism_data.RData)
+
+------------------------------------------------------------------------
+
+::: {style="font-size: 0.85em; color: #555; border-left: 3px solid #ccc; padding-left: 1em; margin-top: 2em;"}
+*AI Usage Disclosure: AI was used in this section to assist with drafting data dictionary descriptions, preprocessing narrative, and structuring the exploratory overview.*
+:::

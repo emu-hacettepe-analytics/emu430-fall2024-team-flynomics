@@ -1,11 +1,22 @@
-
 ---
 title: "Analysis and Findings"
+sidebar: false
+format:
+  html:
+    toc: true
+  pdf:
+    colorlinks: true
+    papersize: a4
+    fontsize: 11pt
+    margin-left: 2cm
+    margin-right: 2cm
+    margin-top: 2cm
+    margin-bottom: 2cm
 execute:
   code-fold: true
   warning: false
   message: false
-  fig-width: 8 
+  fig-width: 8
 ---
 
 > **The central question of this analysis:** As Türkiye's economy faced mounting pressure after 2021, why did international tourism surge while domestic travel collapsed? The answer lies in a phenomenon we call the **"Tourism Scissors."**
@@ -16,7 +27,7 @@ execute:
 -   Passenger trends in winter months follow a more parallel trajectory despite economic shocks.
 -   A direct relationship between the rise in the exchange rate and the decline in domestic tourist traffic has been identified.
 
----
+------------------------------------------------------------------------
 
 ### Data Preprocessing
 
@@ -65,7 +76,7 @@ df_seasonal <- df_clean %>%
   )
 ```
 
----
+------------------------------------------------------------------------
 
 ### 1. Main Trend and the "Scissors Effect"
 
@@ -107,7 +118,7 @@ ggplot(df_yearly, aes(x = Year, y = Total, color = `Flight Type`, group = `Fligh
 
 > 🔍 **Reading the Graph:** Up until 2019, domestic and international lines moved in tandem , both growing steadily. The pandemic (2020) crushed both simultaneously. But the recovery told two completely different stories: **international traffic rebounded aggressively**, while **domestic traffic plateaued well below its pre-pandemic peak**. This is the scissors opening. The crossing point is not a coincidence , it marks the moment economic pressure became structural.
 
----
+------------------------------------------------------------------------
 
 ### 2. Airport and Season-Based Deep Analysis Matrix
 
@@ -147,7 +158,7 @@ ggplot(df_seasonal %>% mutate(Airport = str_replace(Airport, " Havalimanı", "")
 
 > 🔍 **Reading the Graph:** This matrix answers a critical follow-up question: *Is the scissors effect uniform across regions and seasons?* The answer is a clear **no**. Look at **Antalya in Summer** , international traffic towers over domestic, and the gap widens dramatically post-2021. In contrast, **winter months across all airports** show a much more compressed divergence. This tells us the scissors effect is not just national , it is **concentrated in tourism hubs during peak season**, making places like Antalya and Muğla especially exposed to macroeconomic volatility.
 
----
+------------------------------------------------------------------------
 
 ### 3. Macroeconomic Sensitivity: Response to USD/TRY Exchange Rate
 
@@ -183,7 +194,7 @@ ggplot(df_seasonal, aes(x = Avg_USD, y = Total_Passengers, color = `Flight Type`
 
 > 🔍 **Reading the Graph:** This is where correlation becomes causation. The two trend lines tell opposite stories from the **same variable** , the USD/TRY exchange rate. For **international routes**, a higher dollar means more foreign visitors flooding in, attracted by Türkiye's relative affordability , the trend line slopes **upward**. For **domestic routes**, the same rising dollar eats into local purchasing power , the trend line slopes **downward**. One exchange rate, two completely opposite outcomes. This is the mechanical heart of the Tourism Scissors.
 
----
+------------------------------------------------------------------------
 
 ### 4. Causality: Why Did the Scissors Open?
 
@@ -219,9 +230,9 @@ ggplot(df_econ, aes(x = Year, y = Avg_USD)) +
   )
 ```
 
-> 🔍 **Reading the Graph:** The USD/TRY curve is not gradual , it is **parabolic**. From a relatively stable ~3 TL in 2015–2017, the dollar exploded past 30 TL by 2023–2024. This is not a typical currency fluctuation; it represents a **structural collapse in purchasing power** for Turkish households. Every point on this curve represents a family that could no longer afford the same vacation they took the year before. At the same time, for every foreign visitor, Türkiye became progressively cheaper , a powerful magnet for international demand.
+> 🔍 **Reading the Graph:** The USD/TRY curve is not gradual , it is **parabolic**. From a relatively stable \~3 TL in 2015–2017, the dollar exploded past 30 TL by 2023–2024. This is not a typical currency fluctuation; it represents a **structural collapse in purchasing power** for Turkish households. Every point on this curve represents a family that could no longer afford the same vacation they took the year before. At the same time, for every foreign visitor, Türkiye became progressively cheaper , a powerful magnet for international demand.
 
----
+------------------------------------------------------------------------
 
 ### 5. Currency Advantage and the Foreign Tourist Surge (Synergy Analysis)
 
@@ -271,7 +282,7 @@ ggplot(df_intl, aes(x = Year)) +
 
 > 🔍 **Reading the Graph:** Notice how the red line (dollar rate) and the navy bars (international passengers) rise **in near-perfect harmony** after 2021. This is not coincidence , it is a **demand mechanism**. As the lira weakened, Türkiye effectively went "on sale" for foreign visitors. Hotels, food, transport , all became significantly cheaper in dollar or euro terms. The result: a tourism boom driven entirely by currency dynamics. Importantly, this boom did **not** lift domestic travelers , it replaced them.
 
----
+------------------------------------------------------------------------
 
 ### 6. The Double Shock Effect: Inflation (CPI) Dynamics
 
@@ -302,7 +313,7 @@ ggplot(df_econ, aes(x = Year, y = Avg_Inflation)) +
 
 > 🔍 **Reading the Graph:** If the exchange rate was the first blow, **inflation was the second**. The CPI curve shows that domestic prices surged dramatically , especially post-2021. For Turkish households, this created a brutal squeeze: their savings were worth less (currency depreciation), and everything cost more (inflation). Vacation spending , a discretionary expense , was the first item cut from household budgets. Together, these two forces form the **"double shock"** that pushed domestic travelers out of the market entirely.
 
----
+------------------------------------------------------------------------
 
 ### 7. The "Double Shock" Pressure on Domestic Routes (Crowding Out Effect)
 
@@ -352,7 +363,7 @@ ggplot(df_dom, aes(x = Year)) +
 
 > 🔍 **Reading the Graph:** Compare this directly with Section 5. While the dollar and international passengers moved **together and upward**, here the rising navy line (dollar) coincides with **stagnating red bars** (domestic passengers). Despite a post-pandemic bounce in 2021–2022, domestic volumes never reclaimed their 2018 peak. The dollar did not just slow down domestic travel , it built a **structural ceiling** above it. This is the crowding-out effect in action: foreign demand, fueled by currency advantage, fills the capacity that domestic travelers can no longer afford.
 
----
+------------------------------------------------------------------------
 
 ### 8. Pandemic Impact: Recovery Strategies from the Crisis
 
@@ -400,7 +411,7 @@ ggplot(df_covid, aes(x = factor(Year), y = Total_Passengers, fill = `Flight Type
 
 > 🔍 **Reading the Graph:** The 2020 collapse is visible across all airports and both route types , a complete standstill. But look at what happened in 2021 and 2022: **international bars rebounded sharply**, driven by foreign demand reactivating alongside the weakening lira. **Domestic bars**, however, recovered more slowly and unevenly. This airport-level view also reveals regional character: Antalya's international recovery dwarfs its domestic one, while İzmir shows a more balanced bounce. The pandemic was the catalyst , but the economic environment determined who benefited from the recovery and who did not.
 
----
+------------------------------------------------------------------------
 
 ### 9. Correlation Analysis: Numerical Evidence and Breakpoints
 
@@ -427,11 +438,9 @@ cor_shock_data <- cor_all_data %>% filter(Year >= 2021)
 r_shock <- cor(cor_shock_data$Passengers, cor_shock_data$Dollar, use = "complete.obs")
 ```
 
-**Perspective A: All-Time (2015–2025)**
-When examining the full dataset, the correlation coefficient is **`r round(r_all, 2)`**. This seemingly moderate figure is **misleading** , the 2020 pandemic year introduced extreme noise (near-zero passengers regardless of the exchange rate), which artificially weakens the correlation signal.
+**Perspective A: All-Time (2015–2025)** When examining the full dataset, the correlation coefficient is **`r round(r_all, 2)`**. This seemingly moderate figure is **misleading** , the 2020 pandemic year introduced extreme noise (near-zero passengers regardless of the exchange rate), which artificially weakens the correlation signal.
 
-**Perspective B: Economic Shock Period (2021–2025)**
-When we isolate the post-pandemic recovery years, the correlation jumps to **`r round(r_shock, 2)`**. This is the clean signal: once the pandemic distortion is removed, the relationship between the dollar and domestic travel demand becomes unmistakably clear.
+**Perspective B: Economic Shock Period (2021–2025)** When we isolate the post-pandemic recovery years, the correlation jumps to **`r round(r_shock, 2)`**. This is the clean signal: once the pandemic distortion is removed, the relationship between the dollar and domestic travel demand becomes unmistakably clear.
 
 ```{r}
 #| label: plot-shock-v2
@@ -462,3 +471,9 @@ ggplot(df_shock, aes(x = `USD/TRY`, y = `Monthly Passengers`)) +
 ```
 
 > 🔍 **Reading the Graph:** Each colored dot represents a month in the post-pandemic era. The trend line slopes **upward** , meaning as the dollar rose, domestic passengers did increase slightly due to the post-lockdown rebound. But here is the critical insight: **the ceiling is visible**. No matter how much time passed or how far the recovery went, monthly domestic passenger counts never broke through to 2018 levels. The glass ceiling is not metaphorical , it is embedded in the data. The dollar did not just slow recovery; it **capped it permanently**. This is where we leave our audience with a question worth asking: *If the exchange rate remains structurally high, will domestic tourism ever fully recover?*
+
+------------------------------------------------------------------------
+
+::: {style="font-size: 0.85em; color: #555; border-left: 3px solid #ccc; padding-left: 1em; margin-top: 2em;"}
+*AI Usage Disclosure: AI was used in this section to assist with interpreting visualizations, drafting analytical commentary beneath each graph, and structuring the narrative flow of findings.*
+:::

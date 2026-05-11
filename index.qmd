@@ -1,10 +1,23 @@
+
 ---
 title: "The Tourism Scissors"
+sidebar: false
+format:
+  html:
+    toc: false
+  pdf:
+    colorlinks: true
+    papersize: a4
+    fontsize: 11pt
+    margin-left: 2cm
+    margin-right: 2cm
+    margin-top: 2cm
+    margin-bottom: 2cm
 ---
 
 # Project Description
 
-This project explores the "Tourism Scissors" effect in Turkey (2015–2026), a striking divergence where domestic travel declines as international tourism surges. By merging monthly aviation mobility data from DHMİ with key macroeconomic indicators (USD/TRY exchange rates and CPI) from the Central Bank of Turkey (TCMB), we aim to decode the intricate relationship between economic shifts and travel behavior. Our analysis pinpoints critical inflection points and tracks evolving passenger dynamics across major tourism hubs like Antalya, Muğla, and İzmir.
+This project explores the **"Tourism Scissors"** effect in Turkey (2015–2025), a striking divergence where domestic travel declines as international tourism surges. By merging monthly aviation mobility data from DHMİ with key macroeconomic indicators (USD/TRY exchange rates and CPI) from the Central Bank of Turkey (TCMB), we aim to decode the intricate relationship between economic shifts and travel behavior. Our analysis pinpoints critical inflection points and tracks evolving passenger dynamics across major tourism hubs like Antalya, Muğla, and İzmir.
 
 ### Team Members
 
@@ -13,10 +26,18 @@ This project explores the "Tourism Scissors" effect in Turkey (2015–2026), a s
 -   [Fatma Şeyma Toksöz](https://emu-hacettepe-analytics.github.io/emu430-spring2026-b2220469019/)
 -   [Sude Nakişci](https://emu-hacettepe-analytics.github.io/emu430-spring2026-sudenakisci/)
 
+---
+
 ### Key Takeaways
 
--   **Core Focus**: Examines the divergence between domestic and international flight demand in Turkey, termed the "Tourism Scissors" effect.
+-   **Core Focus**: Examines the divergence between domestic and international flight demand in Turkey, termed the "Tourism Scissors" effect, a structural split that emerged most sharply after 2021.
+-   **Data Integration**: Utilizes a dual-source dataset combining DHMİ monthly passenger statistics with TCMB macroeconomic indicators (USD/TRY exchange rates and CPI) spanning 2015 to 2025.
+-   **Regional Analysis**: Specifically targets major tourism hubs (Antalya, Muğla, İzmir) to measure the localized impact of economic changes on travel behavior, revealing that the scissors effect is far more acute in coastal tourism regions than in metropolitan hubs.
+-   **Main Finding**: As the USD/TRY rate surged past 30 TL, international passenger volumes reached near-record highs while domestic volumes remained structurally suppressed, a "glass ceiling" created by declining household purchasing power.
+-   **Policy Implication**: The analysis raises a critical question: if exchange rates remain structurally elevated, domestic tourism may face a permanent structural decline rather than a temporary cyclical downturn.
 
--   **Data Integration**: Utilizes a dual-source dataset combining DHMİ passenger statistics with TCMB macroeconomic indicators (exchange rates and CPI) from 2015 to 2026.
+------------------------------------------------------------------------
 
--   **Regional Analysis**: Specifically targets major tourism hubs (Antalya, Muğla, İzmir) to measure the localized impact of economic changes on travel behavior.
+::: {style="font-size: 0.85em; color: #555; border-left: 3px solid #ccc; padding-left: 1em; margin-top: 2em;"}
+*AI Usage Disclosure: AI was used in the preparation of this project to assist with writing, structuring, and refining the narrative content presented on this page.*
+:::
